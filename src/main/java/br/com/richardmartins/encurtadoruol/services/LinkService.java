@@ -4,8 +4,10 @@ import java.util.Date;
 
 import javax.persistence.NoResultException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import br.com.richardmartins.encurtadoruol.errors.BadRequestException;
 import br.com.richardmartins.encurtadoruol.errors.NotFoundException;
 import br.com.richardmartins.encurtadoruol.models.Link;
 import br.com.richardmartins.encurtadoruol.repositories.LinkRepository;
@@ -22,9 +24,10 @@ public class LinkService {
 	}
 
 	public Link salvar(String url) {
+		validaUrl(url);
 		Long id = linkRepository.count();
 
-		String referencia = UrlUtils.INSTANCE.createUniqueID(id);
+		String referencia = UrlUtils.encurtar(id);
 
 		Link link = new Link();
 		link.setUrl(url);
@@ -45,7 +48,7 @@ public class LinkService {
 		return linkVO;
 	}
 
-	public String buscarUrlPorReferencia(String referencia) {
+	public String buscarUrlPorReferencia(String referencia) throws BadRequestException {
 		String url;
 
 		try {
@@ -54,5 +57,15 @@ public class LinkService {
 			throw new NotFoundException("Url não encontrada");
 		}
 		return url;
+	}
+
+	private static void validaUrl(String url) {
+		if (StringUtils.isBlank(url)) {
+			throw new BadRequestException("Deve-se passar uma url que não seja vazia");
+		}
+
+		if (!UrlUtils.validarUrl(url)) {
+			throw new BadRequestException("Está url não é valida");
+		}
 	}
 }

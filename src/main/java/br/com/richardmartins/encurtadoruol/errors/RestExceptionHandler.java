@@ -24,6 +24,18 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
 		return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(BadRequestException.class)
+	public ResponseEntity<?> handleResourceBadRequestException(BadRequestException exception) {
+
+		ErrorExceptionDetalhe errorDetails = new ErrorExceptionDetalhe();
+		errorDetails.setStatus(HttpStatus.BAD_REQUEST.value());
+		errorDetails.setDetalhe(exception.getMessage());
+		errorDetails.setTitulo("Parâmetros incorretos");
+		errorDetails.setData(new Date());
+
+		return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+	}
 
 	@Override
 	protected ResponseEntity<Object> handleExceptionInternal(Exception exception, Object body, HttpHeaders headers,
