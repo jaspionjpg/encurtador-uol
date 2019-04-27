@@ -3,6 +3,7 @@ package br.com.richardmartins.encurtadoruol.repositories.queries;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.Tuple;
@@ -14,7 +15,7 @@ public class LinkQueryImpl implements LinkQuery {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public LinkVO buscarLinkVOPorReferencia(String referencia) {
+	public LinkVO buscarLinkVOPorReferencia(String referencia) throws NoResultException {
 		StringBuffer sql = new StringBuffer();
 
 		sql.append("SELECT link.referencia_url_gerada, link.url, link.data_criacao ");
@@ -36,7 +37,7 @@ public class LinkQueryImpl implements LinkQuery {
 		return linkVO;
 	}
 	
-	public String buscarUrlPorReferencia(String referencia) {
+	public String buscarUrlPorReferencia(String referencia) throws NoResultException {
 		StringBuffer sql = new StringBuffer();
 
 		sql.append("SELECT link.url ");

@@ -49,6 +49,6 @@ public class LinkVO {
 	}
 	
 	public void popularUrlEncurtada() {
-		this.urlEncurtada = StringUtils.join(PropertiesUtils.URL_DOMINIO_APLICACAO, "/", this.referenciaUrlGerada);
+		this.urlEncurtada = StringUtils.join(PropertiesUtils.URL_DOMINIO_APLICACAO, "/e/", this.referenciaUrlGerada);
 	}
 }

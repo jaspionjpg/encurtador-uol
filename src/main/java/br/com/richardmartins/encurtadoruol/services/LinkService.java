@@ -2,8 +2,11 @@ package br.com.richardmartins.encurtadoruol.services;
 
 import java.util.Date;
 
+import javax.persistence.NoResultException;
+
 import org.springframework.stereotype.Service;
 
+import br.com.richardmartins.encurtadoruol.errors.NotFoundException;
 import br.com.richardmartins.encurtadoruol.models.Link;
 import br.com.richardmartins.encurtadoruol.repositories.LinkRepository;
 import br.com.richardmartins.encurtadoruol.utils.UrlUtils;
@@ -20,22 +23,36 @@ public class LinkService {
 
 	public Link salvar(String url) {
 		Long id = linkRepository.count();
-		
-		String reeferrncia = UrlUtils.INSTANCE.createUniqueID(id);
-		
+
+		String referencia = UrlUtils.INSTANCE.createUniqueID(id);
+
 		Link link = new Link();
 		link.setUrl(url);
 		link.setDataCriacao(new Date());
-		link.setReferenciaUrlGerada(reeferrncia);
+		link.setReferenciaUrlGerada(referencia);
 
 		return linkRepository.save(link);
 	}
 
 	public LinkVO buscarLinkVOPorReferencia(String referencia) {
-		return linkRepository.buscarLinkVOPorReferencia(referencia);
+		LinkVO linkVO;
+
+		try {
+			linkVO = linkRepository.buscarLinkVOPorReferencia(referencia);
+		} catch (NoResultException e) {
+			throw new NotFoundException("Link não encontrado");
+		}
+		return linkVO;
 	}
 
 	public String buscarUrlPorReferencia(String referencia) {
-		return linkRepository.buscarUrlPorReferencia(referencia);
+		String url;
+
+		try {
+			url = linkRepository.buscarUrlPorReferencia(referencia);
+		} catch (NoResultException e) {
+			throw new NotFoundException("Url não encontrada");
+		}
+		return url;
 	}
 }
