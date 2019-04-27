@@ -13,6 +13,8 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
+import br.com.richardmartins.encurtadoruol.vo.LinkVO;
+
 @Entity
 @Table(name = "LINK")
 public class Link {
@@ -63,5 +65,14 @@ public class Link {
 
 	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
+	}
+
+	public LinkVO toVO() {
+		LinkVO linkVO = new LinkVO();
+		linkVO.setDataCriacao(this.dataCriacao);
+		linkVO.setReferenciaUrlGerada(this.referenciaUrlGerada);
+		linkVO.setUrl(this.url);
+		linkVO.popularUrlEncurtada();
+		return linkVO;
 	}
 }
