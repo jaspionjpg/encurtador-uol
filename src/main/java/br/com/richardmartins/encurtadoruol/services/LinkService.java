@@ -1,6 +1,7 @@
 package br.com.richardmartins.encurtadoruol.services;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.NoResultException;
 
@@ -12,6 +13,7 @@ import br.com.richardmartins.encurtadoruol.errors.NotFoundException;
 import br.com.richardmartins.encurtadoruol.models.Link;
 import br.com.richardmartins.encurtadoruol.repositories.LinkRepository;
 import br.com.richardmartins.encurtadoruol.utils.UrlUtils;
+import br.com.richardmartins.encurtadoruol.vo.EstatisticaVO;
 import br.com.richardmartins.encurtadoruol.vo.LinkVO;
 
 @Service
@@ -48,15 +50,26 @@ public class LinkService {
 		return linkVO;
 	}
 
-	public String buscarUrlPorReferencia(String referencia) throws BadRequestException {
+	public void somarLinkRedirecionado(String referencia) {
+		linkRepository.somarLinkRedirecionado(referencia);
+	}
+
+	public String buscarUrlPorReferencia(String referencia, Boolean somar) throws BadRequestException {
 		String url;
 
 		try {
 			url = linkRepository.buscarUrlPorReferencia(referencia);
+			if (somar) {
+				this.somarLinkRedirecionado(referencia);
+			}
 		} catch (NoResultException e) {
 			throw new NotFoundException("Url não encontrada");
 		}
 		return url;
+	}
+
+	public List<EstatisticaVO> buscarInformacoesEstatisticas() {
+		return linkRepository.buscarInformacoesEstatisticas();
 	}
 
 	private static void validaUrl(String url) {

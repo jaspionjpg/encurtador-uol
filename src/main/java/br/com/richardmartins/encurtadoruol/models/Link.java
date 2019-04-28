@@ -35,6 +35,9 @@ public class Link {
 	@Column(name = "data_criacao")
 	private Date dataCriacao;
 
+	@Column(name = "numero_vezes_redirecionado")
+	private Long numeroVezesRedirecionado;
+
 	public Long getId() {
 		return id;
 	}
@@ -65,6 +68,14 @@ public class Link {
 
 	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
+	}
+	
+	public Long getNumeroVezesRedirecionado() {
+		return numeroVezesRedirecionado;
+	}
+
+	public void setNumeroVezesRedirecionado(Long numeroVezesRedirecionado) {
+		this.numeroVezesRedirecionado = numeroVezesRedirecionado;
 	}
 
 	public LinkVO toVO() {

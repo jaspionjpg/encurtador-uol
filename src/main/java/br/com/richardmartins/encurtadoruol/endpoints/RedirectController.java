@@ -18,7 +18,7 @@ public class RedirectController {
 
 	@GetMapping("/e/{referencia}")
 	public RedirectView buscarLink(@PathVariable String referencia) {
-		String url = linkService.buscarUrlPorReferencia(referencia);
+		String url = linkService.buscarUrlPorReferencia(referencia, true);
 		return new RedirectView(url);
 	}
 }

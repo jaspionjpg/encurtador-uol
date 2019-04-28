@@ -1,0 +1,1 @@
+alter table encurtador_uol.link add column numero_vezes_redirecionado bigint default 0;
