@@ -1,0 +1,1 @@
+# Buscar estatísticas pela API

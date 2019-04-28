@@ -1,0 +1,1 @@
+# Encurtar link pela API
