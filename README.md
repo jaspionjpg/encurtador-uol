@@ -38,7 +38,7 @@ Sempre que você for fazer uma requisição em uma API é necessario passar o he
 
 ### API
 
-Bom.. a api tem o Swagger UI configurado, que pode ser acessado atravez do link <http://localhost:8080/swagger-ui.html>
+Bom.. a api tem o Swagger UI configurado, que pode ser acessado atravez da aplicação no link <http://localhost:8080/swagger-ui.html>
 
 Porem tambem é explicado detalhado cada um separadamente logo a baixo:
 
