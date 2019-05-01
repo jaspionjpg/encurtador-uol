@@ -1,3 +1,4 @@
+create schema encurtador_uol;
 create table encurtador_uol.link (
 	id bigint,
 	url varchar(255),

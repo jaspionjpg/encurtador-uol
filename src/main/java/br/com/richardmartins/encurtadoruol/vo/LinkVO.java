@@ -16,6 +16,16 @@ public class LinkVO {
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dataCriacao;
 
+	public LinkVO() {
+	}
+
+	public LinkVO(String url, String urlEncurtada, String referenciaUrlGerada, Date dataCriacao) {
+		this.url = url;
+		this.urlEncurtada = urlEncurtada;
+		this.referenciaUrlGerada = referenciaUrlGerada;
+		this.dataCriacao = dataCriacao;
+	}
+
 	public String getUrl() {
 		return url;
 	}
