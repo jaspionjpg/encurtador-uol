@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.persistence.NoResultException;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = EncurtadorUolApplication.class)
 @TestPropertySource(locations = "classpath:application-test.properties")
@@ -17,7 +19,7 @@ public class LinkServiceTest {
     @Autowired
     private LinkRepository linkRepository;
 
-    @Test
+    @Test(expected = NoResultException.class)
     public void buscarLinkVOPorReferencia() {
         linkRepository.buscarLinkVOPorReferencia("MA");
     }
