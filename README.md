@@ -9,7 +9,7 @@ Nesse projeto foram usados as tecnologias Java com Spring Boot, PostgreSQL como 
 * Primeiro é preciso ter o PostgreSQL instalado e conetado, Java 8 e Maven
 * É preciso criar uma nova database com o nome "postgres" (Caso queira usar uma base já existente, basta mudar a url de conexão no propertie "spring.datasource.url" no arquivo [application.properties](https://github.com/jaspionjpg/encurtador-uol/blob/master/src/main/resources/application.properties)
 * Dentro da database criada é necessario criar 1 schema
-	* 'public': é o schema que será usado para administração do flyway (Você deve crialo)
+	* 'public': é o schema que será usado para administração do flyway (Você deve criá-lo)
 	    * CREATE SCHEMA PUBLIC;
 	* 'encurtador_uol': é o schema que a aplicação ira usar para fazer a persistencia de dados (é criado automaticamento pelo flyway automaticamente e você não deve criar)
 	* As criação de tabelas da aplicação são gerenciados pelo flyway com base na versão dos arquivos da pasta [db/migration](https://github.com/jaspionjpg/encurtador-uol/tree/master/src/main/resources/db/migration), por conta disso não é necessario rodar mais nenhuma SQL.
