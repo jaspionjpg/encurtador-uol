@@ -1,13 +1,5 @@
 package br.com.richardmartins.encurtadoruol.services;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.NoResultException;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Service;
-
 import br.com.richardmartins.encurtadoruol.errors.BadRequestException;
 import br.com.richardmartins.encurtadoruol.errors.NotFoundException;
 import br.com.richardmartins.encurtadoruol.models.Link;
@@ -15,6 +7,13 @@ import br.com.richardmartins.encurtadoruol.repositories.LinkRepository;
 import br.com.richardmartins.encurtadoruol.utils.UrlUtils;
 import br.com.richardmartins.encurtadoruol.vo.EstatisticaVO;
 import br.com.richardmartins.encurtadoruol.vo.LinkVO;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
+
+import javax.persistence.NoResultException;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LinkService {
@@ -72,7 +71,7 @@ public class LinkService {
 		return linkRepository.buscarInformacoesEstatisticas();
 	}
 
-	private static void validaUrl(String url) {
+	public void validaUrl(String url) {
 		if (StringUtils.isBlank(url)) {
 			throw new BadRequestException("Deve-se passar uma url que não seja vazia");
 		}
